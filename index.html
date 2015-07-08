@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chatroom</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <link rel="import" href="elements.html">
+    <style>
+        paper-input {
+            display: inline;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        
+        namebox {
+            max-width: 100px;
+        }
+
+    </style>
+</head>
+
+<body class="fullbleed layout vertical">
+
+    <template is="dom-bind" id="app">
+        <paper-header-panel class="flex">
+            <firebase-collection location="https://chatforintern.firebaseIO.com" data="{{chats}}"></firebase-collection>
+            <template is="dom-repeat" items="[[chats]]" as="chat">
+                <h4>[[chat.name]]</h4>
+                <span>[[chat.message]]</span>
+            </template>
+        </paper-header-panel>
+        <paper-toolbar>
+            <paper-input id="namebox" label="Your name" value="{{name}}"></paper-input>
+            <paper-input label="Message" class="flex" value="{{message}}"></paper-input>
+            <paper-button on-click="send">Send</paper-button>
+        </paper-toolbar>
+
+    </template>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
