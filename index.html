@@ -24,7 +24,7 @@
 
     <template is="dom-bind" id="app">
         <paper-header-panel class="flex">
-            <firebase-collection location="https://chatforintern.firebaseIO.com" data="{{chats}}"></firebase-collection>
+            <firebase-collection limit-to-last="10" location="https://chatforintern.firebaseIO.com" data="{{chats}}"></firebase-collection>
             <template is="dom-repeat" items="[[chats]]" as="chat">
                 <h4>[[chat.name]]</h4>
                 <span>[[chat.message]]</span>
