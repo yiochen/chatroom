@@ -11,15 +11,25 @@ var app;
                 message: app.message
             });
             app.message = "";
+            //            scrollToBottom();
         };
+        app.messageView = document.querySelector("paper-header-panel");
+        //        scrollToBottom();
 
     }
-    if (app) {
+
+    function scrollToBottom() {
+
+        var children = app.messageView.children[0].children;
+        children[children.length - 2].scrollIntoView();
+
+    }
+    //    if (app) {
+    //        init();
+    //    } else {
+
+    app.addEventListener('dom-change', function (e) {
         init();
-    } else {
-
-        app.addEventListener('dom-change', function (e) {
-            init();
-        });
-    }
+    });
+    //    }
 })(wrap(document));

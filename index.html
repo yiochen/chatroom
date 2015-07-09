@@ -2,19 +2,43 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chatroom</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <link rel="import" href="elements.html">
-    <style>
+    <style is="custom-style">
         paper-input {
             display: inline;
             margin-left: 10px;
             margin-right: 10px;
         }
         
-        namebox {
+        #namebox {
             max-width: 100px;
+        }
+        
+        .post {
+            display: table;
+            background: cyan;
+            margin: 20px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .post h4 {
+            display: inline;
+            margin-right: 20px;
+        }
+        
+        paper-toolbar {
+            background-color: yellow;
+        }
+        
+        paper-button {
+            background-color: mediumpurple;
         }
 
     </style>
@@ -24,10 +48,14 @@
 
     <template is="dom-bind" id="app">
         <paper-header-panel class="flex">
-            <firebase-collection limit-to-last="10" location="https://chatforintern.firebaseIO.com" data="{{chats}}"></firebase-collection>
+            <firebase-collection location="https://chatforintern.firebaseIO.com" data="{{chats}}"></firebase-collection>
             <template is="dom-repeat" items="[[chats]]" as="chat">
-                <h4>[[chat.name]]</h4>
-                <span>[[chat.message]]</span>
+                <div class="post">
+                    <h4>[[chat.name]]</h4>
+                    <span>[[chat.message]]</span>
+                    <span>[[char.time]]</span>
+                </div>
+
             </template>
         </paper-header-panel>
         <paper-toolbar>
